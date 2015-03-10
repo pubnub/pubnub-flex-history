@@ -7,7 +7,8 @@ var pubnub_flex_history = function (args1, completed) {
         start: 0,
         end: 0,
         channel: args1.channel,
-        messages: []
+        messages: [],
+        operation: "undefined"
     };
 
     result.operation = (args1.hasOwnProperty('last') ? "last" : result.operation);
@@ -59,12 +60,13 @@ var pubnub_flex_history = function (args1, completed) {
                 error: true,
                 errorObject: e,
                 errorMessage: e.toString()
-            })
+            });
         };
 
-        //console.log("getPage", args2);
-        self.history(args2)
+        self.history(args2);
     }
+
+
 
     //*****************************************
     // Process Arguments
@@ -88,8 +90,8 @@ var pubnub_flex_history = function (args1, completed) {
         // If retrieving more than 100
         if (parseInt(args1.last) > 100) {
 
-            function nextPage() {
-                params.count = (args1.last - result.count >= 100 ? 100 : args1.last - result.count )
+            function lastNextPage() {
+                params.count = (args1.last - result.count >= 100 ? 100 : args1.last - result.count );
 
                 getPage(params, function (r) {
 
@@ -106,7 +108,7 @@ var pubnub_flex_history = function (args1, completed) {
 
                     if (result.count < args1.last) {
                         params.end = r.start;  // since going in reverse order
-                        nextPage();
+                        lastNextPage();
                     }
                     else {
                         completed(result);
@@ -114,7 +116,7 @@ var pubnub_flex_history = function (args1, completed) {
                 });
             }
 
-            nextPage();
+            lastNextPage();
 
         }
     }
@@ -124,7 +126,7 @@ var pubnub_flex_history = function (args1, completed) {
         params.start = checkTimetoken(args1.since);
         params.reverse = true;
 
-        function nextPage() {
+        function sinceNextPage() {
 
             getPage(params, function (r) {
 
@@ -142,7 +144,7 @@ var pubnub_flex_history = function (args1, completed) {
                 // continue paging if returns whole page
                 if (r.count === 100) {
                     params.start = r.end;
-                    nextPage();
+                    sinceNextPage();
                 }
                 else {
                     completed(result);
@@ -150,7 +152,7 @@ var pubnub_flex_history = function (args1, completed) {
             });
         }
 
-        nextPage();
+        sinceNextPage();
     }
     // Range of messages in channel
     else if (args1.hasOwnProperty('getrange')) {
@@ -213,7 +215,7 @@ var pubnub_flex_history = function (args1, completed) {
         params.end = end;
         params.reverse = true;
 
-        function nextPage() {
+        function betweenNextPage() {
 
             getPage(params, function (r) {
 
@@ -231,7 +233,7 @@ var pubnub_flex_history = function (args1, completed) {
                 // continue paging if returns whole page
                 if (r.count === 100) {
                     params.start = r.end;
-                    nextPage();
+                    betweenNextPage();
                 }
                 else {
                     completed(result);
@@ -239,7 +241,7 @@ var pubnub_flex_history = function (args1, completed) {
             });
         }
 
-        nextPage();
+        betweenNextPage();
 
     }
     // At moment in time (at: timetoken or epoch)

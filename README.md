@@ -21,8 +21,13 @@ A Javascript History wrapper for flexible history calls. In all the methods, an 
 
   p.flex_history = pubnub_flex_history;
   
-  var history_callback = function(result) {
-    console.log(result);
+  var flex_history_callback = function(result) {
+    if (!result.error) {
+      console.log(result.operation + " completed", result);
+    }
+    else {
+      console.warn(result.operation + " failed", result);
+    }
   }
 </script>
 ```
@@ -36,6 +41,12 @@ The general usage follows as:
     p.flex_history(options_object, completed_callback)
 
 options_object requires a channel name, and a command which is one of [last, since, between, at, getrange]
+
+```javascript
+{
+  channel: [channelname]
+}
+```
 
 ### last ###
 
@@ -58,12 +69,13 @@ Get all messages since timetoken
 
 var since = 1426010693;
 
-p.flex_history({
-    channel: 'AAPL',
-    since: since
-}, function(result) {
-    console.log("since " + since + " completed", result);
-});
+var options = {
+  channel: 'AAPL',
+  since: since
+}
+
+p.flex_history(options, flex_history_callback);
+
 ```
 
 ### between ###
