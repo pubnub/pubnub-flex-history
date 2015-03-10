@@ -138,4 +138,6 @@ p.flex_history(options, flex_history_callback);
 
 To view the results, open the page and the debug console in your browser.
 
+[Test Page](http://scalabl3.github.io/pubnub-flex-history/test.html)
+
 
