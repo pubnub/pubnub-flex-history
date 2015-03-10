@@ -10,6 +10,21 @@ var pubnub_flex_history = function (args1, completed) {
         messages: []
     };
 
+    result.operation = (args1.hasOwnProperty('last') ? "last" : result.operation);
+    result.operation = (args1.hasOwnProperty('since') ? "since" : result.operation);
+    result.operation = (args1.hasOwnProperty('between') ? "between" : result.operation);
+    result.operation = (args1.hasOwnProperty('at') ? "at" : result.operation);
+    result.operation = (args1.hasOwnProperty('getrange') ? "getrange" : result.operation);
+
+    if (!args1.hasOwnProperty('channel')) {
+        console.error("ERROR: pubnub_flex_history requires a channel specified in options object");
+        result.channel = null;
+        result.error = true;
+        result.errorMessage = "channel not specified";
+        completed(result);
+        return;
+    }
+
     var params = {
         channel: args1.channel,
         include_token: true
@@ -236,6 +251,9 @@ var pubnub_flex_history = function (args1, completed) {
         });
     }
     else {
-        console.error("flex_history() Operation required, one of [last, since, getrange, between, at]");
+        console.error("ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at]");
+        result.error = true;
+        result.errorMessage = "ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at]";
+        completed(result);
     }
 };
