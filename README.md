@@ -14,6 +14,13 @@ Compressed
 <script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history-min.js"></script>
 ```
 
+## test.html ##
+
+To view the results, open the page and the debug console in your browser.
+
+[Test Page](http://scalabl3.github.io/pubnub-flex-history/test.html)
+
+
 ## Setup Example
 
 ```javascript
@@ -134,10 +141,6 @@ p.flex_history(options, flex_history_callback);
 
 ```
 
-## test.html ##
 
-To view the results, open the page and the debug console in your browser.
-
-[Test Page](http://scalabl3.github.io/pubnub-flex-history/test.html)
 
 
