@@ -4,7 +4,7 @@ A Javascript History wrapper for flexible history calls. In all the methods, an 
 ## Include
 
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.0/pubnub-flex-history.js"></script>
 ```
 
 ## Setup Example
