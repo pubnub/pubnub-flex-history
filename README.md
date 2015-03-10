@@ -23,8 +23,12 @@ To view the results, open the page and the debug console in your browser.
 
 ## Setup Example
 
-Get the PubNub Javascript SDK, get the pubnub_flex_history from this repo (CDN url provided via rawgit),
-and add the method to your instantiated pubnub object.
+Pretty straightforward here:
+
+* Get the PubNub Javascript SDK
+* Get the pubnub_flex_history from this repo (CDN url provided via rawgit)
+* Add the method to your instantiated pubnub object
+
 
 ```javascript
 <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
