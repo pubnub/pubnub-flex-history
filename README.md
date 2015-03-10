@@ -23,6 +23,9 @@ To view the results, open the page and the debug console in your browser.
 
 ## Setup Example
 
+Get the PubNub Javascript SDK, get the pubnub_flex_history from this repo (CDN url provided via rawgit),
+and add the method to your instantiated pubnub object.
+
 ```javascript
 <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
 <script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history-min.js"></script>
