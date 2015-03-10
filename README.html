@@ -1,0 +1,97 @@
+<h1>pubnub-flex-history</h1>
+
+<p>A Javascript History wrapper for flexible history calls. In all the methods, an unix epoch timestamp or a PubNub 17 digit timetoken can be provided where timetokens are expected.</p>
+
+<h2>Include</h2>
+
+<p>```javascript</p>
+
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.0/pubnub-flex-history.js"></script>
+
+
+<p>```</p>
+
+<h2>Setup Example</h2>
+
+<p>```javascript</p>
+
+<script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
+
+
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
+
+
+<script>
+  // Call Init first to create a PubNub instance, then add the wrapper method to that object
+  var p = PUBNUB.init({
+    publish_key: 'demo',
+    subscribe_key: 'demo'
+  });
+
+  p.flex_history = pubnub_flex_history;
+  
+  var flex_history_callback = function(result) {
+    if (!result.error) {
+      console.log(result.operation + " completed", result);
+    }
+    else {
+      console.warn(result.operation + " failed", result);
+    }
+  }
+</script>
+
+
+<p>```</p>
+
+<h2>Usage Options</h2>
+
+<h3>general</h3>
+
+<p>The general usage follows as:</p>
+
+<pre><code>p.flex_history(options_object, completed_callback)
+</code></pre>
+
+<p>options_object requires a channel name, and a command which is one of [last, since, between, at, getrange]</p>
+
+<p><code>javascript
+{
+  channel: [channelname]
+}
+</code></p>
+
+<h3>last</h3>
+
+<p>Gets the last n messages from the channel.</p>
+
+<p><code>javascript
+p.flex_history({
+    channel: 'AAPL',
+    last: 20
+}, function(result) {
+    console.log("last 20 completed", result);
+});
+</code></p>
+
+<h3>since</h3>
+
+<p>Get all messages since timetoken</p>
+
+<p>```javascript</p>
+
+<p>var since = 1426010693;</p>
+
+<p>var options = {
+  channel: &lsquo;AAPL&rsquo;,
+  since: since
+}</p>
+
+<p>p.flex_history(options, flex_history_callback);</p>
+
+<p>```</p>
+
+<h3>between</h3>
+
+<h3>at</h3>
+
+<h3>getrange</h3>
