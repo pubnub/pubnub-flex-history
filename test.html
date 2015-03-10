@@ -1,0 +1,102 @@
+
+<html>
+<head>
+    <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
+    <script src="//rawgit.com/scalabl3/pubnub-flex-history/master/pubnub_flex_history.js"></script>
+    <script>
+        var p = PUBNUB.init({
+            publish_key: 'demo',
+            subscribe_key: 'demo'
+        });
+
+        p.flex_history = pubnub_flex_history;
+
+
+        p.flex_history({
+            channel: 'AAPL',
+            last: 20
+        }, function(result) {
+            console.log("last 350 completed", result);
+        });
+
+
+        p.time(
+                function(time){
+                    //console.log(time);
+                    var utcs = (time / 10000000) | 0;
+                    var s = new Date(0);
+                    s.setUTCSeconds(utcs);
+                    //console.log(utcs);
+                    //console.log(s);
+
+                    var sinceTime = (utcs - (60 * 3)) * 10000000;
+                    //console.log(sinceTime);
+                    //console.log("");
+
+                    setTimeout(function() {
+
+                        p.flex_history({
+                            channel: 'AAPL',
+                            since: sinceTime
+                        }, function(result) {
+                            console.log("since 3 mins completed", result);
+                        });
+
+                    }, 2000);
+                }
+        );
+
+
+        p.time(
+                function(time){
+                    //console.log(time);
+                    var utcs = (time / 10000000) | 0;
+                    var s = new Date(0);
+                    s.setUTCSeconds(utcs);
+                    //console.log(utcs);
+                    //console.log(s);
+
+                    var startTime = (utcs - (60 * 5)) * 10000000;
+                    var endTime = (utcs - (60 * 1)) * 10000000;
+
+                    setTimeout(function() {
+
+                        p.flex_history({
+                            channel: 'AAPL',
+                            between: [startTime, endTime]
+                        }, function(result) {
+                            console.log("between 2-3 mins completed", result);
+
+                        });
+
+                    }, 2000);
+                }
+        );
+
+        var at;
+
+        p.flex_history({
+            channel: 'AAPL',
+            getrange: true
+        }, function (result) {
+            console.log("getrange completed", result);
+            at = ((result.endE - result.startE) / 2 | 0) + result.startE;
+            at = 1425970809;
+            console.log(at);
+            p.flex_history({
+                channel: 'AAPL',
+                at: at
+            }, function(result) {
+                console.log("at completed", result);
+                if (result.count > 0) {
+                    //console.log(at, result.messages[0].timetoken, at - result.messages[0].timetoken);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>Open the Debug Console to see the Tests and Results</h1>
+</body>
+</html>
