@@ -3,6 +3,7 @@
 <head>
     <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
     <script src="//rawgit.com/scalabl3/pubnub-flex-history/master/pubnub_flex_history.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script>
         var p = PUBNUB.init({
             publish_key: 'demo',
@@ -94,9 +95,35 @@
             });
         });
 
+        console.log("ERROR Scenarios");
+
+        // Forget to specify channel
+        p.flex_history({
+            last: 20
+        }, function(result) {
+            if (!result.error) {
+                console.log("last 20 completed", result);
+            }
+            else {
+                console.warn("last 20 failed", result)
+            }
+        });
+
+        // Forget to specify operation
+        p.flex_history({
+            channel: 'AAPL'
+        }, function(result) {
+            if (!result.error) {
+                console.log("completed", result);
+            }
+            else {
+                console.warn("failed", result)
+            }
+        });
+
     </script>
 </head>
 <body>
-    <h1>Open the Debug Console to see the Tests and Results</h1>
+    <h4>Open the Debug Console to see the Tests and Results</h4>
 </body>
 </html>

@@ -253,7 +253,7 @@ var pubnub_flex_history = function (args1, completed) {
     else {
         console.error("ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at]");
         result.error = true;
-        result.errorMessage = "ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at]";
+        result.errorMessage = "operation required, one of [last, since, getrange, between, at]";
         completed(result);
     }
 };
