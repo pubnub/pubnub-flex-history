@@ -94,29 +94,38 @@
                 }
         );
 
+
+        // Test getrange followed by at
         var at;
 
         p.flex_history({
             channel: 'AAPL',
             getrange: true
         }, function (result) {
-            console.log("getrange completed", result);
-            at = ((result.endE - result.startE) / 2 | 0) + result.startE;
 
-            console.log(at);
-            p.flex_history({
-                channel: 'AAPL',
-                at: at
-            }, function(result) {
+            if (!result.error) {
+                console.log("getrange completed", result);
 
-                if (!result.error) {
-                    console.log("at completed", result);
-                }
-                else {
-                    console.warn("at failed", result)
-                }
+                at = ((result.endE - result.startE) / 2 | 0) + result.startE;
 
-            });
+                p.flex_history({
+                    channel: 'AAPL',
+                    at: at
+                }, function(result) {
+
+                    if (!result.error) {
+                        console.log("at completed", result);
+                    }
+                    else {
+                        console.warn("at failed", result)
+                    }
+
+                });
+            }
+            else {
+                console.warn("between 2-3 mins failed", result);
+                console.warn("not running at operation");
+            }
         });
 
         setTimeout(function(){
