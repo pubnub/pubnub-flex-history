@@ -54,6 +54,14 @@ var pubnub_flex_history = function (args1, completed) {
             });
         };
 
+        args2.error = function(e) {
+            callback({
+                error: true,
+                errorObject: e,
+                errorMessage: e.toString()
+            })
+        };
+
         //console.log("getPage", args2);
         self.history(args2)
     }
@@ -84,6 +92,7 @@ var pubnub_flex_history = function (args1, completed) {
                 params.count = (args1.last - result.count >= 100 ? 100 : args1.last - result.count )
 
                 getPage(params, function (r) {
+
                     result.count += r.count;
                     Array.prototype.push.apply(result.messages, r.messages);
 
@@ -111,13 +120,14 @@ var pubnub_flex_history = function (args1, completed) {
     }
     // Since timetoken (since: timetoken or epoch)
     else if (args1.hasOwnProperty('since')) {
+
         params.start = checkTimetoken(args1.since);
         params.reverse = true;
 
         function nextPage() {
 
             getPage(params, function (r) {
-                //console.log("getPageResult", r);
+
                 result.count += r.count;
                 Array.prototype.push.apply(result.messages, r.messages);
 
@@ -144,12 +154,14 @@ var pubnub_flex_history = function (args1, completed) {
     }
     // Range of messages in channel
     else if (args1.hasOwnProperty('getrange')) {
+
         params.count = 1;
 
         result.messages = {};
 
         // get latest message
         getPage(params, function (r) {
+
             result.messages.last = r.messages[0];
 
             if (r.end > result.end) {
@@ -188,6 +200,7 @@ var pubnub_flex_history = function (args1, completed) {
     }
     // Between Timetokens (between: [timetoken, timetoken] (or epoch))
     else if (args1.hasOwnProperty('between')) {
+
         var start = checkTimetoken(args1.between[0]);
         var end = checkTimetoken(args1.between[1]);
 
@@ -203,7 +216,7 @@ var pubnub_flex_history = function (args1, completed) {
         function nextPage() {
 
             getPage(params, function (r) {
-                //console.log("getPageResult", r);
+
                 result.count += r.count;
                 Array.prototype.push.apply(result.messages, r.messages);
 
@@ -235,7 +248,7 @@ var pubnub_flex_history = function (args1, completed) {
         params.start = checkTimetoken(args1.at) - 1; // since start is exclusive, subtract a nanosecond
         params.count = 1;
         getPage(params, function (r) {
-            //console.log("getPageResult", r);
+
             result.count += r.count;
             Array.prototype.push.apply(result.messages, r.messages);
 

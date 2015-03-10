@@ -4,14 +4,14 @@ A Javascript History wrapper for flexible history calls. In all the methods, an 
 ## Include
 
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub_flex_history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
 ```
 
 ## Setup Example
 
 ```javascript
 <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub_flex_history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
 <script>
   // Call Init first to create a PubNub instance, then add the wrapper method to that object
   var p = PUBNUB.init({
