@@ -3,15 +3,23 @@ A Javascript History wrapper for flexible history calls. In all the methods, an 
 
 ## Include
 
+Uncompressed
+
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.0/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history.js"></script>
+```
+
+Compressed
+```javascript
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history-min.js"></script>
 ```
 
 ## Setup Example
 
 ```javascript
 <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history-min.js"></script>
+
 <script>
   // Call Init first to create a PubNub instance, then add the wrapper method to that object
   var p = PUBNUB.init({
@@ -53,17 +61,20 @@ options_object requires a channel name, and a command which is one of [last, sin
 Gets the last n messages from the channel.
 
 ```javascript
-p.flex_history({
-    channel: 'AAPL',
-    last: 20
-}, function(result) {
-    console.log("last 20 completed", result);
-});
+
+// get last 30 messages
+var options = {
+  channel: 'AAPL',
+  last: 30
+}
+
+p.flex_history(options, flex_history_callback);
+
 ```
 
 ### since ###
 
-Get all messages since timetoken
+Get all messages since epoch timestamps or PubNub timetoken.
 
 ```javascript
 
@@ -80,9 +91,51 @@ p.flex_history(options, flex_history_callback);
 
 ### between ###
 
+Get all messages between epoch timestamps or PubNub timetokens.
+
+```javascript
+
+var options = {
+  channel: 'AAPL',
+  between: [1426010693, 1426021664]
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
 
 ### at ###
 
+Get single nearest or exact message at epoch timestamp or PubNub timetoken.
+
+```javascript
+
+var options = {
+  channel: 'AAPL',
+  at: 14259785889989920
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
 
 ### getrange ###
+
+Get the start and end DateTime range of the channel, timetoken of first message and timetoken of most recent message.
+
+```javascript
+
+var options = {
+  channel: 'AAPL',
+  getrange: true
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
+
+## test.html ##
+
+To view the results, open the page and the debug console in your browser.
+
 
