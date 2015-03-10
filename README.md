@@ -34,8 +34,10 @@ To view the results, open the page and the debug console in your browser.
     subscribe_key: 'demo'
   });
 
+  // ** REQUIRED ** Add flex_history method to your PubNub object
   p.flex_history = pubnub_flex_history;
-  
+
+  // Example of a generic callback, but of course you can use your own
   var flex_history_callback = function(result) {
     if (!result.error) {
       console.log(result.operation + " completed", result);
