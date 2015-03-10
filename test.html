@@ -17,7 +17,14 @@
             channel: 'AAPL',
             last: 20
         }, function(result) {
-            console.log("last 350 completed", result);
+
+            if (!result.error) {
+                console.log("last 350 completed", result);
+            }
+            else {
+                console.warn("last 350 failed", result);
+            }
+
         });
 
 
@@ -40,7 +47,14 @@
                             channel: 'AAPL',
                             since: sinceTime
                         }, function(result) {
-                            console.log("since 3 mins completed", result);
+
+                            if (!result.error) {
+                                console.log("since 3 mins completed", result);
+                            }
+                            else {
+                                console.warn("since 3 mins failed", result);
+                            }
+
                         });
 
                     }, 2000);
@@ -66,7 +80,13 @@
                             channel: 'AAPL',
                             between: [startTime, endTime]
                         }, function(result) {
-                            console.log("between 2-3 mins completed", result);
+
+                            if (!result.error) {
+                                console.log("between 2-3 mins completed", result);
+                            }
+                            else {
+                                console.warn("between 2-3 mins failed", result);
+                            }
 
                         });
 
@@ -82,44 +102,57 @@
         }, function (result) {
             console.log("getrange completed", result);
             at = ((result.endE - result.startE) / 2 | 0) + result.startE;
-            at = 1425970809;
+
             console.log(at);
             p.flex_history({
                 channel: 'AAPL',
                 at: at
             }, function(result) {
-                console.log("at completed", result);
-                if (result.count > 0) {
-                    //console.log(at, result.messages[0].timetoken, at - result.messages[0].timetoken);
+
+                if (!result.error) {
+                    console.log("at completed", result);
                 }
+                else {
+                    console.warn("at failed", result)
+                }
+
             });
         });
 
-        console.log("ERROR Scenarios");
+        setTimeout(function(){
 
-        // Forget to specify channel
-        p.flex_history({
-            last: 20
-        }, function(result) {
-            if (!result.error) {
-                console.log("last 20 completed", result);
-            }
-            else {
-                console.warn("last 20 failed", result)
-            }
-        });
+            console.log("");
+            console.log("ERROR Scenarios");
 
-        // Forget to specify operation
-        p.flex_history({
-            channel: 'AAPL'
-        }, function(result) {
-            if (!result.error) {
-                console.log("completed", result);
-            }
-            else {
-                console.warn("failed", result)
-            }
-        });
+            // Forget to specify channel
+            p.flex_history({
+                last: 20
+            }, function(result) {
+
+                if (!result.error) {
+                    console.log("last 20 completed", result);
+                }
+                else {
+                    console.warn("last 20 failed", result)
+                }
+
+            });
+
+            // Forget to specify operation
+            p.flex_history({
+                channel: 'AAPL'
+            }, function(result) {
+
+                if (!result.error) {
+                    console.log("completed", result);
+                }
+                else {
+                    console.warn("failed", result)
+                }
+
+            });
+
+        }, 3000);
 
     </script>
 </head>
