@@ -1,5 +1,7 @@
 # pubnub-flex-history
-A Javascript History wrapper for flexible history calls, automatically handling any paging. In all the methods, an unix epoch timestamp or a PubNub 17 digit timetoken can be provided where timetokens are expected.
+A Javascript History wrapper for flexible history calls, automatically handling any paging.
+
+*In all the methods, an unix epoch timestamp or a PubNub 17 digit timetoken can be provided where timetokens are expected.*
 
 ## Include
 
