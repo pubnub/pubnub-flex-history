@@ -107,6 +107,23 @@ p.flex_history(options, flex_history_callback);
 
 ```
 
+### upto ###
+
+Get all messages from first message in channel "up to" epoch timestamps or PubNub timetoken.
+
+```javascript
+
+var upto = 1426010693;
+
+var options = {
+  channel: 'AAPL',
+  upto: upto
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
+
 ### between ###
 
 Get all messages between epoch timestamps or PubNub timetokens.
