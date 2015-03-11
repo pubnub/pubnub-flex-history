@@ -124,6 +124,23 @@ var options = {
 
 <p>```</p>
 
+<h3>upto</h3>
+
+<p>Get all messages from first message in channel &ldquo;up to&rdquo; epoch timestamps or PubNub timetoken.</p>
+
+<p>```javascript</p>
+
+<p>var upto = 1426010693;</p>
+
+<p>var options = {
+  channel: &lsquo;AAPL&rsquo;,
+  upto: upto
+}</p>
+
+<p>p.flex_history(options, flex_history_callback);</p>
+
+<p>```</p>
+
 <h3>between</h3>
 
 <p>Get all messages between epoch timestamps or PubNub timetokens.</p>

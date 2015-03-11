@@ -8,12 +8,12 @@ A Javascript History wrapper for flexible history calls, automatically handling 
 Uncompressed
 
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.02/pubnub-flex-history.js"></script>
 ```
 
 Compressed
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.01/pubnub-flex-history-min.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.02/pubnub-flex-history-min.js"></script>
 ```
 
 ## test.html ##
