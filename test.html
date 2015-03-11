@@ -2,9 +2,12 @@
 <html>
 <head>
     <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
-    <script src="//rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>
+    <!--<script src="//rawgit.com/scalabl3/pubnub-flex-history/master/pubnub-flex-history.js"></script>-->
+    <script src="pubnub-flex-history.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script>
+        var results = [];
+
         var p = PUBNUB.init({
             publish_key: 'demo',
             subscribe_key: 'demo'
@@ -19,6 +22,7 @@
         }, function(result) {
 
             if (!result.error) {
+                results.push(results);
                 console.log("last 350 completed", result);
             }
             else {
@@ -26,40 +30,6 @@
             }
 
         });
-
-
-        p.time(
-                function(time){
-                    //console.log(time);
-                    var utcs = (time / 10000000) | 0;
-                    var s = new Date(0);
-                    s.setUTCSeconds(utcs);
-                    //console.log(utcs);
-                    //console.log(s);
-
-                    var sinceTime = (utcs - (60 * 3)) * 10000000;
-                    //console.log(sinceTime);
-                    //console.log("");
-
-                    setTimeout(function() {
-
-                        p.flex_history({
-                            channel: 'AAPL',
-                            since: sinceTime
-                        }, function(result) {
-
-                            if (!result.error) {
-                                console.log("since 3 mins completed", result);
-                            }
-                            else {
-                                console.warn("since 3 mins failed", result);
-                            }
-
-                        });
-
-                    }, 2000);
-                }
-        );
 
 
         p.time(
@@ -82,6 +52,7 @@
                         }, function(result) {
 
                             if (!result.error) {
+                                results.push(results);
                                 console.log("between 2-3 mins completed", result);
                             }
                             else {
@@ -95,7 +66,7 @@
         );
 
 
-        // Test getrange followed by at
+        // Test getrange followed by at, since, and upto
         var at;
 
         p.flex_history({
@@ -106,14 +77,17 @@
             if (!result.error) {
                 console.log("getrange completed", result);
 
+                // calculate timetoken midway between start and end of range
                 at = ((result.endE - result.startE) / 2 | 0) + result.startE;
 
+                // test at
                 p.flex_history({
                     channel: 'AAPL',
                     at: at
                 }, function(result) {
 
                     if (!result.error) {
+                        results.push(results);
                         console.log("at completed", result);
                     }
                     else {
@@ -121,12 +95,48 @@
                     }
 
                 });
+
+                // test since
+                p.flex_history({
+                    channel: 'AAPL',
+                    since: result.endE - (60*2)
+                }, function(result) {
+
+                    if (!result.error) {
+                        results.push(results);
+                        console.log("since completed", result);
+                    }
+                    else {
+                        console.warn("since failed", result);
+                    }
+
+                });
+
+                // test upto
+                p.flex_history({
+                    channel: 'AAPL',
+                    upto: result.startE + (60*2)
+                }, function(result) {
+
+                    if (!result.error) {
+                        results.push(results);
+                        console.log("upto completed", result);
+                    }
+                    else {
+                        console.warn("upto failed", result);
+                    }
+                });
+
+
+
             }
             else {
                 console.warn("between 2-3 mins failed", result);
                 console.warn("not running at operation");
             }
         });
+
+
 
         setTimeout(function(){
 
@@ -156,16 +166,16 @@
                     console.log("completed", result);
                 }
                 else {
-                    console.warn("failed", result)
+                    console.warn("no operation failed", result)
                 }
 
             });
 
-        }, 3000);
+        }, 4000);
 
     </script>
 </head>
 <body>
-    <h4>Open the Debug Console to see the Tests and Results</h4>
+<h4>Open the Debug Console to see the Tests and Results</h4>
 </body>
 </html>
