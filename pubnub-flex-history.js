@@ -8,7 +8,8 @@ var pubnub_flex_history = function (args1, completed) {
         end: 0,
         channel: args1.channel,
         messages: [],
-        operation: "undefined"
+        operation: "undefined",
+        operationValue: "undefined"
     };
 
     result.operation = (args1.hasOwnProperty('last') ? "last" : result.operation);
@@ -77,7 +78,7 @@ var pubnub_flex_history = function (args1, completed) {
 
     // Most recent (last: count)
     if (args1.hasOwnProperty('last')) {
-        result.operation = 'last';
+
         result.operationValue = args1.last;
 
         // If retrieving less than 100
@@ -127,7 +128,6 @@ var pubnub_flex_history = function (args1, completed) {
     // Since timetoken (since: timetoken or epoch)
     else if (args1.hasOwnProperty('since')) {
 
-        result.operation = 'since';
         result.operationValue = args1.since;
 
         params.start = checkTimetoken(args1.since);
@@ -164,7 +164,6 @@ var pubnub_flex_history = function (args1, completed) {
     // Upto a timetoken (since: timetoken or epoch) [from first message in channel]
     else if (args1.hasOwnProperty('upto')) {
 
-        result.operation = 'upto';
         result.operationValue = args1.upto;
 
         params.end = checkTimetoken(args1.upto);
@@ -201,7 +200,6 @@ var pubnub_flex_history = function (args1, completed) {
     // Range of messages in channel
     else if (args1.hasOwnProperty('getrange')) {
 
-        result.operation = 'getrange';
         result.operationValue = true;
         result.messages = {};
 
@@ -250,7 +248,6 @@ var pubnub_flex_history = function (args1, completed) {
     // Between Timetokens (between: [timetoken, timetoken] (or epoch))
     else if (args1.hasOwnProperty('between')) {
 
-        result.operation = 'between';
         result.operationValue = args1.between;
 
         var start = checkTimetoken(args1.between[0]);
@@ -297,7 +294,6 @@ var pubnub_flex_history = function (args1, completed) {
     // At moment in time (at: timetoken or epoch)
     else if (args1.hasOwnProperty('at')) {
 
-        result.operation = 'at';
         result.operationValue = args1.at;
 
         params.start = checkTimetoken(args1.at);
