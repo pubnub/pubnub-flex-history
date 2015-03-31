@@ -22,6 +22,8 @@ To view the results, open the page and the debug console in your browser.
 
 [Test Page](http://scalabl3.github.io/pubnub-flex-history/test.html)
 
+(getall operation is disabled in the test, because it retrieves about 85,000+ messages,
+about 10MB worth)
 
 ## Setup Example
 
