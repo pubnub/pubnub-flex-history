@@ -18,7 +18,7 @@ var pubnub_flex_history = function (args1, completed) {
     result.operation = (args1.hasOwnProperty('between') ? "between" : result.operation);
     result.operation = (args1.hasOwnProperty('at') ? "at" : result.operation);
     result.operation = (args1.hasOwnProperty('getrange') ? "getrange" : result.operation);
-
+	result.operation = (args1.hasOwnProperty('getall') ? "getall" : result.operation);
 
     if (!args1.hasOwnProperty('channel')) {
         console.error("ERROR: pubnub_flex_history requires a channel specified in options object");
@@ -315,10 +315,48 @@ var pubnub_flex_history = function (args1, completed) {
             completed(result);
         });
     }
+    // Get All available History on Channel 
+    // (same code as since, with hardcoded start timetoken)
+    else if (args1.hasOwnProperty('getall')) {
+
+        result.operationValue = true;
+
+        // Use timetoken from 5 years ago (1/1/2010)
+        params.start = checkTimetoken(1262307661);
+        params.reverse = true;
+
+        function sinceNextPage() {
+
+            getPage(params, function (r) {
+
+                result.count += r.count;
+                Array.prototype.push.apply(result.messages, r.messages);
+
+                if (r.start < result.start || result.start === 0) {
+                    result.start = r.start;
+                }
+
+                if (r.end > result.end) {
+                    result.end = r.end;
+                }
+
+                // continue paging if returns whole page
+                if (r.count === 100) {
+                    params.start = r.end;
+                    sinceNextPage();
+                }
+                else {
+                    completed(result);
+                }
+            });
+        }
+
+        sinceNextPage();
+    }
     else {
-        console.error("ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at]");
+        console.error("ERROR: pubnub_flex_history operation required, one of [last, since, getrange, between, at, getall]");
         result.error = true;
-        result.errorMessage = "operation required, one of [last, since, getrange, upto, between, at]";
+        result.errorMessage = "operation required, one of [last, since, getrange, upto, between, at, getall]";
         result.errorArgs = args1;
         completed(result);
     }

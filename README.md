@@ -8,12 +8,12 @@ A Javascript History wrapper for flexible history calls, automatically handling 
 Uncompressed
 
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.03/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history.js"></script>
 ```
 
 Compressed
 ```javascript
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.03/pubnub-flex-history-min.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history-min.js"></script>
 ```
 
 ## test.html ##
@@ -34,7 +34,7 @@ Pretty straightforward here:
 
 ```javascript
 <script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.03/pubnub-flex-history-min.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history-min.js"></script>
 
 <script>
   // Call Init first to create a PubNub instance, then add the wrapper method to that object
@@ -169,6 +169,20 @@ p.flex_history(options, flex_history_callback);
 
 ```
 
+### getall ###
+
+Get all the history available on the channel.
+
+```javascript
+
+var options = {
+  channel: 'AAPL',
+  getall: true
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
 
 
 
