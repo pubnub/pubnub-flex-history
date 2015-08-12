@@ -10,7 +10,7 @@
 
 <p>```javascript</p>
 
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history.js"></script>
 
 
 <p>```</p>
@@ -18,7 +18,7 @@
 <p>Compressed
 ```javascript</p>
 
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history-min.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history-min.js"></script>
 
 
 <p>```</p>
@@ -45,10 +45,10 @@ about 10MB worth)</p>
 
 <p>```javascript</p>
 
-<script src="//cdn.pubnub.com/pubnub-3.7.8.js"></script>
+<script src="//cdn.pubnub.com/pubnub-3.7.14.js"></script>
 
 
-<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.04/pubnub-flex-history-min.js"></script>
+<script src="//cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history-min.js"></script>
 
 
 
@@ -112,16 +112,16 @@ var options = {
 
 <h3>before</h3>
 
-<p>Gets the n messages from the channel before timetoken or epoch timestamp.</p>
+<p>Gets the last n messages from the channel.</p>
 
 <p>```javascript</p>
 
 <p>var before = 1426010693;</p>
 
-<p>// get 30 messages before timetoken
+<p>// get last 30 messages
 var options = {
   channel: &lsquo;AAPL&rsquo;,
-  before: before,
+  before: before
   msgcount: 30
 }</p>
 
