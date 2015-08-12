@@ -92,6 +92,25 @@ p.flex_history(options, flex_history_callback);
 
 ```
 
+### before ###
+
+Gets the last n messages from the channel.
+
+```javascript
+
+var before = 1426010693;
+
+// get last 30 messages
+var options = {
+  channel: 'AAPL',
+  before: before
+  msgcount: 30
+}
+
+p.flex_history(options, flex_history_callback);
+
+```
+
 ### since ###
 
 Get all messages since epoch timestamps or PubNub timetoken.

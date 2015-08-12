@@ -110,6 +110,25 @@ var options = {
 
 <p>```</p>
 
+<h3>before</h3>
+
+<p>Gets the n messages from the channel before timetoken or epoch timestamp.</p>
+
+<p>```javascript</p>
+
+<p>var before = 1426010693;</p>
+
+<p>// get 30 messages before timetoken
+var options = {
+  channel: &lsquo;AAPL&rsquo;,
+  before: before,
+  msgcount: 30
+}</p>
+
+<p>p.flex_history(options, flex_history_callback);</p>
+
+<p>```</p>
+
 <h3>since</h3>
 
 <p>Get all messages since epoch timestamps or PubNub timetoken.</p>
